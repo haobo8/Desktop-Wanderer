@@ -16,10 +16,10 @@ def get_nearly_target_box(result: list[Box]) -> Box:
     if len(result) > 1:
         x, y, w, h = box.x, box.y, box.w, box.h
         center_x = x + w // 2
-        area = w * h
+        area = w * h - (abs(TARGET_CX - center_x) * h) * 0.3
         for other_box in result[1:]:
             x, y, w, h = other_box.x, other_box.y, other_box.w, other_box.h
-            if area < w * h - (abs(TARGET_CX - center_x) * h) * 0.1:
+            if area < w * h - (abs(TARGET_CX - center_x) * h) * 0.3:
                 box = other_box
     return box
 
